@@ -1,4 +1,4 @@
-package com.example.digi_bell
+package com.ar.digi_bell
 
 import org.junit.Test
 

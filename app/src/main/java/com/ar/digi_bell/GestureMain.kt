@@ -1,5 +1,5 @@
 
-package com.example.digi_bell
+package com.ar.digi_bell
 
 import android.content.Context
 import android.content.Intent
@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.ar.digi_bell.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -61,7 +62,7 @@ class GestureMain : AppCompatActivity() {
             // sensorManager.unregisterListener(sensorListener)
              unregisterListener()
              Log.e("UR", "Unregistered ACC")
-             dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
+             dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
              dbRef.child("Help").removeValue()
 
          }
@@ -85,7 +86,7 @@ class GestureMain : AppCompatActivity() {
                // sensorManager1.unregisterListener(sensorListener1)
                 unregisterListener()
                 Log.e("UR", "Unregistered PRO")
-                dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
+                dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
                 dbRef.child("Help").removeValue()
 
             }
@@ -197,7 +198,7 @@ class GestureMain : AppCompatActivity() {
 
     private fun sendHelp(sendHelp: String){
         firebaseUserID = auth.currentUser!!.uid
-        dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
+        dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
         dbRef.child("Help").setValue(sendHelp)
         Toast.makeText(this, "Asking Help", Toast.LENGTH_SHORT).show()
     }

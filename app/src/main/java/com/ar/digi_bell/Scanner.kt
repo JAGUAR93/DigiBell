@@ -1,4 +1,4 @@
-package com.example.digi_bell
+package com.ar.digi_bell
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -15,6 +15,7 @@ import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
 import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
+import com.ar.digi_bell.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -36,7 +37,7 @@ class Scanner : AppCompatActivity() {
 
         auth = Firebase.auth
         firebaseUserID = auth.currentUser!!.uid
-        dbRef4 = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
+        dbRef4 = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
 
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) ==
             PackageManager.PERMISSION_DENIED
@@ -101,7 +102,7 @@ class Scanner : AppCompatActivity() {
                 Log.e("rslt", "$it")
                 if(it.toString() != " "){
                     Toast.makeText(this, "Scan Completed click on Add to add in the list", Toast.LENGTH_SHORT).show()
-                    dbRef1 = FirebaseDatabase.getInstance().reference.child("Users").child(it.text)
+                    dbRef1 = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(it.text)
                     dbRef1.child("Name").addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             name = snapshot.getValue(String::class.java)

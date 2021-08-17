@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.digi_bell">
+    package="com.ar.digi_bell">
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -13,51 +13,51 @@
         android:roundIcon="@mipmap/appkafinalicon_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.Digi_Bell.NoActionBar.">
-        <activity android:name=".Scanner"
+        <activity android:name="com.ar.digi_bell.Scanner"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar."/>
 
         <activity
-            android:name=".Login"
+            android:name="com.ar.digi_bell.Login"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar." />
         <activity
-            android:name=".NumberUpdate"
+            android:name="com.ar.digi_bell.NumberUpdate"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar." />
         <activity
-            android:name=".GestureMain"
+            android:name="com.ar.digi_bell.GestureMain"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar." />
         <activity
-            android:name=".Generator1"
+            android:name="com.ar.digi_bell.Generator1"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar." />
         <activity
-            android:name=".ScanReceive"
+            android:name="com.ar.digi_bell.ScanReceive"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar." />
         <activity
-            android:name=".Receiver"
+            android:name="com.ar.digi_bell.Receiver"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar." />
         <activity
-            android:name=".SignUp"
+            android:name="com.ar.digi_bell.SignUp"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar." />
         <activity
-            android:name=".Personal_info"
+            android:name="com.ar.digi_bell.Personal_info"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar." />
         <activity
-            android:name=".HomeScreen2"
+            android:name="com.ar.digi_bell.HomeScreen2"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar." />
         <activity
-            android:name=".HomeScreen1"
+            android:name="com.ar.digi_bell.HomeScreen1"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Digi_Bell.NoActionBar." />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.ar.digi_bell.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

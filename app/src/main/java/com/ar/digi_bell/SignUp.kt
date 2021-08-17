@@ -1,4 +1,4 @@
-package com.example.digi_bell
+package com.ar.digi_bell
 
 
 import android.content.Intent
@@ -7,8 +7,8 @@ import android.text.InputType
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
+import com.ar.digi_bell.R
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.PhoneAuthProvider.ForceResendingToken
@@ -18,8 +18,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_sign_up.*
-import java.lang.NullPointerException
-import java.sql.Types.NULL
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.HashMap
@@ -141,8 +139,9 @@ class SignUp : AppCompatActivity() {
             }
             override fun onVerificationFailed(e: FirebaseException) {
 
-                Toast.makeText(this@SignUp, e.message, Toast.LENGTH_LONG).show();
-                Log.i("Fail", "onVerificationFailed: " + e.localizedMessage);
+                Toast.makeText(this@SignUp, e.message, Toast.LENGTH_LONG).show()
+                Log.i("Fail", "onVerificationFailed: " + e.localizedMessage)
+
 
             }
             override fun onCodeSent(s: String, forceResendingToken: ForceResendingToken) {
@@ -160,8 +159,9 @@ class SignUp : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    val message = "Sssssss..."
                     firebaseUserID = auth.currentUser!!.uid
-                    dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
+                    dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
                     val userHashMap = HashMap<String, Any>()
                     val ino = 1
                     userHashMap["uid"] = firebaseUserID
@@ -174,19 +174,38 @@ class SignUp : AppCompatActivity() {
                     userHashMap["ListId"]
                     userHashMap["Help"]
                     userHashMap["INo"] = ino
-                    dbRef.updateChildren(userHashMap).addOnCompleteListener { task ->
-                        if (task.isSuccessful){
-                            val intent = Intent(this, ScanReceive::class.java)
-                            intent.flags =
-                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(intent)
-                            finish()
-                            Toast.makeText(this, "SignUp Successful", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
+//                    dbRef.child("uid").setValue(firebaseUserID)
+//                    dbRef.child("Name").setValue(nameInNum.text.toString())
+//                    dbRef.child("Number").setValue(number.text.toString())
+//                    dbRef.child("Password").setValue(passInNum.text.toString())
+//                    dbRef.child("INo").setValue(ino)
+//                    val intent = Intent(this, ScanReceive::class.java)
+//                    intent.flags =
+//                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                    startActivity(intent)
+//                    finish()
+//                    Toast.makeText(this, "SignUp Successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                    dbRef.setValue(userHashMap)
+                    dbRef.setValue(userHashMap).addOnCompleteListener { task ->  if (task.isSuccessful){
+                        val intent = Intent(this, ScanReceive::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                        finish()
+                        Toast.makeText(this, "SignUp Successful", Toast.LENGTH_LONG).show()
+                    }}
+//                    dbRef.updateChildren(userHashMap).addOnCompleteListener(){taskk  ->
+//                        if (taskk.isSuccessful){
+//                           val intent = Intent(this, ScanReceive::class.java)
+//                            intent.flags =
+//                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                            startActivity(intent)
+//                            finish()
+//                            Toast.makeText(this, "SignUp Successful", Toast.LENGTH_LONG).show()
+//                        }
+//                  }
                 } else {
-
                     val message = "Loading..."
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                 }

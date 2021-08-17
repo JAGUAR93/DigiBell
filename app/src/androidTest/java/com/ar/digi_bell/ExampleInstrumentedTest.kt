@@ -1,4 +1,4 @@
-package com.example.digi_bell
+package com.ar.digi_bell
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

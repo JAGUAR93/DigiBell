@@ -1,10 +1,11 @@
-package com.example.digi_bell
+package com.ar.digi_bell
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ar.digi_bell.R
 import kotlinx.android.synthetic.main.activity_scan_receive.*
 
 class ScanReceive : AppCompatActivity() {

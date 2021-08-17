@@ -1,4 +1,4 @@
-package com.example.digi_bell
+package com.ar.digi_bell
 
 
 import android.content.Intent
@@ -15,6 +15,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.budiyev.android.codescanner.*
+import com.ar.digi_bell.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -48,7 +49,7 @@ class Receiver : AppCompatActivity() {
         setContentView(R.layout.activity_receiver)
         auth = Firebase.auth
         firebaseUserID = auth.currentUser!!.uid
-        dbRef4 = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
+        dbRef4 = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
 
         val list = arrayListOf<String>()
         val list2 = arrayListOf<String>()
@@ -170,7 +171,7 @@ class Receiver : AppCompatActivity() {
 
                }else{
 
-                   mediaPlayer = MediaPlayer.create(applicationContext,R.raw.test)
+                   mediaPlayer = MediaPlayer.create(applicationContext, R.raw.test)
                    mediaPlayer.start()
 
 
@@ -243,7 +244,7 @@ class Receiver : AppCompatActivity() {
 
         navigation1!!.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.profile1   -> {
+                R.id.profile1 -> {
                     val gotoAcc = Intent(this, Personal_info::class.java)
                     startActivity(gotoAcc)
                     overridePendingTransition(0, 0)
@@ -286,8 +287,8 @@ class Receiver : AppCompatActivity() {
     private fun dataRef(list: ArrayList<String>) {
 
       list.forEachIndexed { index, _ ->
-          dbRef2 = FirebaseDatabase.getInstance().reference.child("Users").child(list[index])
-          dbRef3 = FirebaseDatabase.getInstance().reference.child("Users")
+          dbRef2 = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(list[index])
+          dbRef3 = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users")
           dbRef2.child("Help").addValueEventListener(object : ValueEventListener{
               override fun onDataChange(snapshot: DataSnapshot) {
                   val help = snapshot.getValue(String::class.java)

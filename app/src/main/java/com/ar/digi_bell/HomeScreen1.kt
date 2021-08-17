@@ -1,14 +1,14 @@
-package com.example.digi_bell
+package com.ar.digi_bell
 
 
 import android.content.Intent
 import android.os.*
 import android.util.Log
 import android.view.MenuItem
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import com.ar.digi_bell.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -98,7 +98,7 @@ class HomeScreen1 : AppCompatActivity() {
 
     private fun sendHelp(sendHelp: String){
         firebaseUserID = auth.currentUser!!.uid
-        dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
+        dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
         dbRef.child("Help").setValue(sendHelp)
         Toast.makeText(this, "Asking Help", Toast.LENGTH_SHORT).show()
     }

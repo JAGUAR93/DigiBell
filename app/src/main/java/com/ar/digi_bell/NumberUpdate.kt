@@ -1,4 +1,4 @@
-package com.example.digi_bell
+package com.ar.digi_bell
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.ar.digi_bell.R
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -33,7 +34,7 @@ class NumberUpdate: AppCompatActivity() {
         auth = Firebase.auth
         firebaseUserID = auth.currentUser!!.uid
 
-        dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
+        dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
 
         inUpdateVcode.setOnClickListener {
             sendVerificationCode()

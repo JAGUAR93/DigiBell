@@ -1,4 +1,4 @@
-package com.example.digi_bell
+package com.ar.digi_bell
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
@@ -9,6 +9,7 @@ import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.ar.digi_bell.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -44,7 +45,7 @@ class HomeScreen2 : AppCompatActivity() {
 
         val TIME_OUT = 10000
         Handler().postDelayed({
-            dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
+            dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
             dbRef.child("Help").removeValue()
             val intent = Intent(this, HomeScreen1::class.java)
             startActivity(intent)
@@ -52,7 +53,7 @@ class HomeScreen2 : AppCompatActivity() {
         }, TIME_OUT.toLong())
 
         hmbtn2.setOnClickListener {
-            dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
+            dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
             dbRef.child("Help").removeValue()
             val i = Intent(this, HomeScreen1::class.java)
             startActivity(i)
