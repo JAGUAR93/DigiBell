@@ -107,7 +107,7 @@
 
     <EditText
         android:id="@+id/signUpCode"
-        android:layout_width="150dp"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/signupcnfrmNum"
         android:layout_alignParentStart="true"
