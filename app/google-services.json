@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "814778207570-pfkqtg1cth08gnnqpasbqmuce74inrb7.apps.googleusercontent.com",
+          "client_id": "814778207570-gs7kvp2te230ukm2l70q6hdp6sfk1j2r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ar.digi_bell",
-            "certificate_hash": "f2e7ba50aea19e6046bc0f4aad6a5773cda20522"
+            "certificate_hash": "863d1a892df8cfb253ba16c5a3810528380a8568"
+          }
+        },
+        {
+          "client_id": "814778207570-q4882bmfi16kvplhe178r72irscrtndo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ar.digi_bell",
+            "certificate_hash": "316fc24c3be066cbbc4da6fba5bee3d30de00ff5"
           }
         },
         {
