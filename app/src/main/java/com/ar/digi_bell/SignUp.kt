@@ -159,7 +159,7 @@ class SignUp : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val message = "Sssssss..."
+                    val message = "Success"
                     firebaseUserID = auth.currentUser!!.uid
                     dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
                     val userHashMap = HashMap<String, Any>()
