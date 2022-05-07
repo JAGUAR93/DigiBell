@@ -45,7 +45,7 @@ class HomeScreen2 : AppCompatActivity() {
 
         val TIME_OUT = 10000
         Handler().postDelayed({
-            dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
+            dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
             dbRef.child("Help").removeValue()
             val intent = Intent(this, HomeScreen1::class.java)
             startActivity(intent)
@@ -53,7 +53,7 @@ class HomeScreen2 : AppCompatActivity() {
         }, TIME_OUT.toLong())
 
         hmbtn2.setOnClickListener {
-            dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
+            dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
             dbRef.child("Help").removeValue()
             val i = Intent(this, HomeScreen1::class.java)
             startActivity(i)

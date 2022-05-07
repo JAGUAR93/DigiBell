@@ -34,7 +34,7 @@ class NumberUpdate: AppCompatActivity() {
         auth = Firebase.auth
         firebaseUserID = auth.currentUser!!.uid
 
-        dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
+        dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
 
         inUpdateVcode.setOnClickListener {
             sendVerificationCode()

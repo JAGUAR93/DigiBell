@@ -98,7 +98,7 @@ class HomeScreen1 : AppCompatActivity() {
 
     private fun sendHelp(sendHelp: String){
         firebaseUserID = auth.currentUser!!.uid
-        dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
+        dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
         dbRef.child("Help").setValue(sendHelp)
         Toast.makeText(this, "Asking Help", Toast.LENGTH_SHORT).show()
     }

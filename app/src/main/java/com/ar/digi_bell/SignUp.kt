@@ -28,6 +28,7 @@ class SignUp : AppCompatActivity() {
     private lateinit var dbRef: DatabaseReference
     private var firebaseUserID: String = ""
     private var codeSent: String = " "
+
     override fun onCreate(savedInstanceState: Bundle?) {
         auth = Firebase.auth
         super.onCreate(savedInstanceState)
@@ -51,13 +52,15 @@ class SignUp : AppCompatActivity() {
                 showPassInNum.text = null
                 showPassInNum.textOn = null
                 showPassInNum.textOff = null
-                passInNum.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                passInNum.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
                 passInNum.setSelection(passInNum.text.length)
             }
         }
 
 
         loginSx.setOnClickListener {
+
             val gotoLogin = Intent(this, Login::class.java)
             startActivity(gotoLogin)
             overridePendingTransition(0, 0)
@@ -70,35 +73,36 @@ class SignUp : AppCompatActivity() {
         }
 
         signupcnfrmNum.setOnClickListener {
-            val email = number.text.toString()
-            val pwd = passInNum.text.toString()
-            if (email.isEmpty()) {
-                number.error = "Please enter email id"
-                number.requestFocus()
-            }
-            else if (pwd.isEmpty()){
-                passInNum.error = "Please enter your password"
-                passInNum.requestFocus()
-            }
-            else if(email.isEmpty() && pwd.isEmpty()){
-                Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show()
-            }
-            else if(pwd != passCnfrmInNum.text.toString()){
-                Toast.makeText(this, "Please confirm your password and enter it again", Toast.LENGTH_SHORT).show()
-            }
-            else if(!(email.isEmpty() && pwd.isEmpty())){
 
-                verifySignInCode()
-                val vCode: String = signUpCode.text.toString().trim { it <= ' ' }
-                if (vCode.isEmpty() || vCode.length < 6) {
-                    number.error = "Enter valid code"
-                    number.requestFocus()
-                    return@setOnClickListener
-                }
-                verifyVerificationCode(vCode)
-            }else{
-                Toast.makeText(this, "Error Occurred", Toast.LENGTH_SHORT).show()
-            }
+//            val email = number.text.toString()
+//            val pwd = passInNum.text.toString()
+//            if (email.isEmpty()) {
+//                number.error = "Please enter email id"
+//                number.requestFocus()
+//            } else if (pwd.isEmpty()) {
+//                passInNum.error = "Please enter your password"
+//                passInNum.requestFocus()
+//            } else if (email.isEmpty() && pwd.isEmpty()) {
+//                Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show()
+//            } else if (pwd != passCnfrmInNum.text.toString()) {
+//                Toast.makeText(
+//                    this,
+//                    "Please confirm your password and enter it again",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//            } else if (!(email.isEmpty() && pwd.isEmpty())) {
+//
+//                verifySignInCode()
+//                val vCode: String = signUpCode.text.toString().trim { it <= ' ' }
+//                if (vCode.isEmpty() || vCode.length < 6) {
+//                    number.error = "Enter valid code"
+//                    number.requestFocus()
+//                    return@setOnClickListener
+//                }
+//                verifyVerificationCode(vCode)
+//            } else {
+//                Toast.makeText(this, "Error Occurred", Toast.LENGTH_SHORT).show()
+//            }
         }
 
 
@@ -130,13 +134,13 @@ class SignUp : AppCompatActivity() {
     private var mCallbacks: OnVerificationStateChangedCallbacks =
         object : OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
-
                 val code = phoneAuthCredential.smsCode
-                if(code != null){
+                if (code != null) {
                     signUpCode.setText(code)
                     verifyVerificationCode(code)
                 }
             }
+
             override fun onVerificationFailed(e: FirebaseException) {
 
                 Toast.makeText(this@SignUp, e.message, Toast.LENGTH_LONG).show()
@@ -144,6 +148,7 @@ class SignUp : AppCompatActivity() {
 
 
             }
+
             override fun onCodeSent(s: String, forceResendingToken: ForceResendingToken) {
                 super.onCodeSent(s, forceResendingToken)
                 codeSent = s
@@ -159,9 +164,14 @@ class SignUp : AppCompatActivity() {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    Toast.makeText(this, "test1234", Toast.LENGTH_SHORT).show()
+                    task.result.user?.let { Log.d("rishabh", it.uid) }
                     val message = "Success"
                     firebaseUserID = auth.currentUser!!.uid
-                    dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
+                    dbRef =
+                        FirebaseDatabase.getInstance().reference.child(
+                            "Users"
+                        ).child(firebaseUserID)
                     val userHashMap = HashMap<String, Any>()
                     val ino = 1
                     userHashMap["uid"] = firebaseUserID
@@ -185,16 +195,24 @@ class SignUp : AppCompatActivity() {
 //                    startActivity(intent)
 //                    finish()
 //                    Toast.makeText(this, "SignUp Successful", Toast.LENGTH_SHORT).show()
+
+
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                     dbRef.setValue(userHashMap)
-                    dbRef.setValue(userHashMap).addOnCompleteListener { task ->  if (task.isSuccessful){
-                        val intent = Intent(this, ScanReceive::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
-                        finish()
-                        Toast.makeText(this, "SignUp Successful", Toast.LENGTH_LONG).show()
-                    }}
+                    dbRef.setValue(userHashMap).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("testing", " datahasbeensaved")
+                            val intent = Intent(this, ScanReceive::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                            finish()
+                            Toast.makeText(this, "SignUp Successful", Toast.LENGTH_LONG).show()
+
+                        } else {
+                            Log.d("testing", " datahasnotbeensaved")
+                        }
+                    }
 //                    dbRef.updateChildren(userHashMap).addOnCompleteListener(){taskk  ->
 //                        if (taskk.isSuccessful){
 //                           val intent = Intent(this, ScanReceive::class.java)
@@ -211,4 +229,6 @@ class SignUp : AppCompatActivity() {
                 }
             }
     }
-}
+
+
+    }

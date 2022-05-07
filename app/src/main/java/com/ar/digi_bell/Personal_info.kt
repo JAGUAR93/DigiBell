@@ -40,7 +40,7 @@ class Personal_info : AppCompatActivity() {
         auth = Firebase.auth
         firebaseUserID = auth.currentUser!!.uid
 
-        dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
+        dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
 
         backPI.setOnClickListener {
             sendid = sharedPreferences.getString("Snd"," ")
@@ -121,7 +121,7 @@ class Personal_info : AppCompatActivity() {
 
     private fun showUpdatePassword(){
     firebaseUserID = auth.currentUser!!.uid
-    dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
+    dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
     val user = FirebaseAuth.getInstance().currentUser
     val builder = AlertDialog.Builder(this)
     builder.setTitle("Update Password")
@@ -167,7 +167,7 @@ class Personal_info : AppCompatActivity() {
 
     private fun showUpdateEmail(emailPI: EditText) {
         firebaseUserID = auth.currentUser!!.uid
-        dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
+        dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
         val user = Firebase.auth.currentUser
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Update Email")
@@ -256,7 +256,7 @@ class Personal_info : AppCompatActivity() {
 
     private fun showUpdateName(namePI: EditText) {
         firebaseUserID = auth.currentUser!!.uid
-        dbRef = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
+        dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Update Name")
         val inflater = LayoutInflater.from(this)

@@ -49,7 +49,7 @@ class Receiver : AppCompatActivity() {
         setContentView(R.layout.activity_receiver)
         auth = Firebase.auth
         firebaseUserID = auth.currentUser!!.uid
-        dbRef4 = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(firebaseUserID)
+        dbRef4 = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
 
         val list = arrayListOf<String>()
         val list2 = arrayListOf<String>()
@@ -287,8 +287,8 @@ class Receiver : AppCompatActivity() {
     private fun dataRef(list: ArrayList<String>) {
 
       list.forEachIndexed { index, _ ->
-          dbRef2 = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users").child(list[index])
-          dbRef3 = FirebaseDatabase.getInstance("https://digibell-90668-default-rtdb.asia-southeast1.firebasedatabase.app/").reference.child("Users")
+          dbRef2 = FirebaseDatabase.getInstance().reference.child("Users").child(list[index])
+          dbRef3 = FirebaseDatabase.getInstance().reference.child("Users")
           dbRef2.child("Help").addValueEventListener(object : ValueEventListener{
               override fun onDataChange(snapshot: DataSnapshot) {
                   val help = snapshot.getValue(String::class.java)

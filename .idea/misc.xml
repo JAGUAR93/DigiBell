@@ -6,6 +6,25 @@
         <entry key="..\:/Users/ANSH/StudioProjects/DigiBell/app/src/main/res/layout-sw320dp/activity_sign_up.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/ANSH/StudioProjects/DigiBell/app/src/main/res/layout/activity_login.xml" value="0.4" />
         <entry key="..\:/Users/ANSH/StudioProjects/DigiBell/app/src/main/res/layout/activity_sign_up.xml" value="0.6460176991150443" />
+        <entry key="app/src/main/res/layout-sw320dp/activity_sign_up.xml" value="0.13677536231884058" />
+        <entry key="app/src/main/res/layout/activity_generator1.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/activity_gesture_main.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/activity_home_screen1.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/activity_home_screen2.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.13677536231884058" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/activity_personal_info.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/activity_receiver.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/activity_scan_receive.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/activity_scanner.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.4967105263157895" />
+        <entry key="app/src/main/res/layout/email_update.xml" value="0.13677536231884058" />
+        <entry key="app/src/main/res/layout/help.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/name_update.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/navigation_header.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/number_update.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/toolbar_main.xml" value="0.24739583333333334" />
+        <entry key="app/src/main/res/layout/update_pass.xml" value="0.24739583333333334" />
       </map>
     </option>
   </component>
