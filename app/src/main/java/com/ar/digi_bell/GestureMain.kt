@@ -47,6 +47,8 @@ class GestureMain : AppCompatActivity() {
 
      gesOn.setOnCheckedChangeListener { _, isChecked ->
          if(isChecked){
+             Log.e("isChecked!!!","trueeee")
+
              val editor = getSharedPreferences("SharedPref", MODE_PRIVATE).edit()
              editor.putBoolean("Checked", true)
              editor.apply()
@@ -60,7 +62,9 @@ class GestureMain : AppCompatActivity() {
              editor.putBoolean("Checked", false)
              editor.apply()
             // sensorManager.unregisterListener(sensorListener)
-             unregisterListener()
+             //unregisterListener()
+             sensorManager.unregisterListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) )
+
              Log.e("UR", "Unregistered ACC")
              dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
              dbRef.child("Help").removeValue()
@@ -72,7 +76,7 @@ class GestureMain : AppCompatActivity() {
 
         ges2On.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked){
-
+Log.e("Proxy","onnn")
                 val editor = getSharedPreferences("SharedPref", MODE_PRIVATE).edit()
                 editor.putBoolean("Checked2", true)
                 editor.apply()
@@ -84,7 +88,8 @@ class GestureMain : AppCompatActivity() {
                 editor.putBoolean("Checked2", false)
                 editor.apply()
                // sensorManager1.unregisterListener(sensorListener1)
-                unregisterListener()
+               // unregisterListener()
+                Objects.requireNonNull(sensorManager1).unregisterListener(sensorListener1)
                 Log.e("UR", "Unregistered PRO")
                 dbRef = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
                 dbRef.child("Help").removeValue()
@@ -177,17 +182,18 @@ class GestureMain : AppCompatActivity() {
     }
 
 
-    override fun onResume() {
-        val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        val sensorManager1 = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(
-            Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL
-        )
-        super.onResume()
-        sensorManager1.registerListener(sensorListener1, sensorManager1.getDefaultSensor(
-            Sensor.TYPE_PROXIMITY), 1000 * 1000
-        )
-    }
+//    override fun onResume() {
+//        val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+//        val sensorManager1 = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+//
+//        sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(
+//            Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL
+//        )
+//        super.onResume()
+//        sensorManager1.registerListener(sensorListener1, sensorManager1.getDefaultSensor(
+//            Sensor.TYPE_PROXIMITY), 1000 * 1000
+//        )
+//    }
     override fun onPause() {
 //        val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 //        val sensorManager1 = getSystemService(Context.SENSOR_SERVICE) as SensorManager

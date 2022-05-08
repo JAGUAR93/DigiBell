@@ -1,6 +1,7 @@
 package com.ar.digi_bell
 
 
+import android.app.Activity
 import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -15,7 +16,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.budiyev.android.codescanner.*
-import com.ar.digi_bell.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
@@ -23,8 +23,8 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_home_screen1.*
 import kotlinx.android.synthetic.main.activity_personal_info.*
 import kotlinx.android.synthetic.main.activity_receiver.*
-import kotlinx.android.synthetic.main.activity_receiver.show
 import kotlinx.android.synthetic.main.toolbar_main.*
+import kotlin.math.log
 
 
 class Receiver : AppCompatActivity() {
@@ -53,6 +53,7 @@ class Receiver : AppCompatActivity() {
 
         val list = arrayListOf<String>()
         val list2 = arrayListOf<String>()
+        val nodeIdsList = arrayListOf<String>()
        // val list3 = arrayListOf<String>()
       //  val list4 = arrayListOf<String>()
 
@@ -82,12 +83,29 @@ class Receiver : AppCompatActivity() {
         show.setOnClickListener {
             dbRef4.child("ListId").addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                     nodeIdsList.clear();
+                      list.clear();
+                    if(snapshot.children.toList().isEmpty())  {
+                        list.clear()
+                        lvSenderId.adapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_list_item_multiple_choice, list)
+
+
+
+
+
+                        return
+                    }
                     for (ds: DataSnapshot in snapshot.children){
+
+
                         val data = ds.getValue(String::class.java)
                         if (data != null) {
+                            nodeIdsList.add(ds.key.toString())
+
                             list.add(data)
                             lvSenderId.adapter = adapter
                             adapter.notifyDataSetChanged()
+                            
                             dataRef(list)
                         }
 
@@ -103,6 +121,15 @@ class Receiver : AppCompatActivity() {
 
             dbRef4.child("ListName").addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    list2.clear();
+                    if(snapshot.children.toList().isEmpty()){
+                        list2.clear()
+                            lvSenderName.adapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_list_item_multiple_choice, list2)
+
+                               return
+                    }
+
+
                     for (ds: DataSnapshot in snapshot.children){
                         val data = ds.getValue(String::class.java)
                         if (data != null) {
@@ -121,7 +148,7 @@ class Receiver : AppCompatActivity() {
 
             })
             senderIDx.text.clear()
-
+            show.isClickable = false
         }
 
         lvSenderName.setOnItemClickListener { _, _, i, _ ->
@@ -135,26 +162,42 @@ class Receiver : AppCompatActivity() {
             val position2: SparseBooleanArray = lvSenderName.checkedItemPositions
             val count2 = lvSenderId.count
             var item2 = count2 - 1
-//            val position3: SparseBooleanArray = lvSenderName.checkedItemPositions
-//            val count3 = lvnum.count
-//            var item3 = count3 - 1
-            while (item >= 0 && item2 >= 0) {
-                if (position.get(item) && position2.get(item2))
-                {
+            val position3: SparseBooleanArray = lvSenderName.checkedItemPositions
+            val count3 = lvnum.count
+            var item3 = count3 - 1
+Log.e("Position!",nodeIdsList.toString())
+            // loop i = 0,
+//            nodeIdsList[0]
+            //            nodeIdsList[3]
+//            get the nodeId and use it in the removeValue
 
-                    var ix:Int = item
-                    ix++
-                    Log.e("ITEM", "n$ix")
-                    dbRef4.child("ListName").child("n$ix").removeValue()
-                    dbRef4.child("ListId").child("n$ix").removeValue()
-                    ino--
-                    dbRef4.child("INo").setValue(ino)
-                    adapter.clear()
-                    adapter2.clear()
-                }
-                item--
-                item2--
+            for (i in 0 until position.size() ) {
+                ino--
+               val nodeId = nodeIdsList[position.keyAt(i)];
+
+                Log.d("DATA DELETE ID ",nodeId);
+                dbRef4.child("ListName").child(nodeId).removeValue()
+                dbRef4.child("ListId").child(nodeId).removeValue()
             }
+            dbRef4.child("INo").setValue(ino)
+
+//            while (item >= 0 && item2 >= 0) {
+//                if (position.get(item) && position2.get(item2))
+//                {
+//
+//                    var ix:Int = item
+//                    ix++
+//                    Log.e("ITEMTEST", "n$ix")
+//                    dbRef4.child("ListName").child("n$ix").removeValue()
+//                    dbRef4.child("ListId").child("n$ix").removeValue()
+//                    ino--
+//                    dbRef4.child("INo").setValue(ino)
+//                    adapter.clear()
+//                    adapter2.clear()
+//                }
+//                item--
+//                item2--
+//            }
             position.clear()
             adapter2.notifyDataSetChanged()
             position2.clear()
@@ -285,7 +328,7 @@ class Receiver : AppCompatActivity() {
 
 
     private fun dataRef(list: ArrayList<String>) {
-
+                      Log.e("Listtttt!!!",list.toString())
       list.forEachIndexed { index, _ ->
           dbRef2 = FirebaseDatabase.getInstance().reference.child("Users").child(list[index])
           dbRef3 = FirebaseDatabase.getInstance().reference.child("Users")
